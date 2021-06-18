@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit,Output } from '@angular/core';
 import { Todo } from 'src/Todo';
 
 @Component({
@@ -8,12 +8,22 @@ import { Todo } from 'src/Todo';
 })
 export class TodoItemComponent implements OnInit {
 
-  @Input()
-  todo!: Todo;
-
+  @Input()todo!: Todo;
+  @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter();
+  @Output() checkboxTodo: EventEmitter<Todo> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  OnClick(todo:Todo){
+    this.deleteTodo.emit(todo);
+    // console.log("TESTED!!!",todo)
+  }
+
+  onCheckBoxClick(todo: Todo){
+    this.checkboxTodo.emit(todo);
+  }
+
 
 }
